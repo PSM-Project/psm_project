@@ -1,1 +1,1 @@
-# psm_project- Valerie Angela Omar
+# psm_project- DCM single-subject

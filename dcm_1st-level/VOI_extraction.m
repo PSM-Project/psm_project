@@ -1,21 +1,20 @@
 %% Time Series Extraction
 % initializing SPM
-if ~exist('spm_path', 'var')
-    spm_path = '/Users/angelaseo/Documents/spm-main';
-end
+spm_path = '/Users/angelaseo/Documents/spm-main'; % Enter the path of your SPM folder
 
-% set root path
-if ~exist('folder_path_root','var')
-    root_folder_path = fileparts(matlab.desktop.editor.getActiveFilename);    % storing the directory path of the active file in the MATLAB editor into the variable folder_path_root 
-end
+% set local data path
+data_folder_path = '/Users/angelaseo/Desktop/PSM_Project/PSM_data'; % Enter the root path of where your data is stored
 
+% add paths
 addpath(spm_path)
+addpath(data_folder_path)
+
 spm('defaults', 'fmri')
 spm_jobman('initcfg')
 
 % specifying data, participant and run paths
-data_folder_path = fullfile(root_folder_path, 'PSM_data'); % DATA folder path
 subject_folder = {'sub-001' 'sub-002'};
+run_folder = {'run-01' 'run-02' 'run-03' 'run-04' 'run-05' 'run-06'};
 
 %%
 for i = 1:numel(subject_folder) % for loop from 1 to number of elements in folder_sub

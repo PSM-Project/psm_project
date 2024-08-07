@@ -22,11 +22,11 @@ subject_folder = {'sub-001' 'sub-002'};
 % regions. The following code creates a DCM file from scratch, which
 % involves some technical subtleties and a deeper knowledge of the DCM
 % structure.
-for i = 1:numel(subject_folder) % for loop from 1 to number of elements in folder_sub
+for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folder_sub
 
     S = []; % init empty structure
     S.data_folder_path = data_folder_path; % add data folder path
-    S.subject_folder = subject_folder{i}; % add subject path
+    S.subject_folder = subject_folder{j}; % add subject path
     
     glm_folder_path = fullfile(S.data_folder_path, S.subject_folder, 'GLM');     % defining GLM folder path
     specified_glm = spm_select('FPList', glm_folder_path, '^SPM.mat$');
@@ -51,8 +51,8 @@ DCM.xY(2) = xY;
 load(fullfile(VOI_folder_path,'VOI_right_insula_1.mat'),'xY');
 DCM.xY(3) = xY;
 
-DCM.n = 3;      % number of regions
-DCM.v = 242; % number of time points
+DCM.n = length(DCM.xY);      % number of regions
+DCM.v = length(DCM.xY(1).u); % number of time points
 
 % Time series
 %--------------------------------------------------------------------------
@@ -95,124 +95,24 @@ DCM.c = [0, 0, 1;  % Driving input 3 affects `rBA2`
          0, 0, 0;  % No input to `left_temporal_pole`
          0, 0, 0]; % No input to `right_insula`
 % 
- save(fullfile(data_path,'GLM','DCM_m1_null.mat'),'DCM');
-
-%  Connectivity matrices for Model 1: Stim BU only
-%--------------------------------------------------------------------------
-DCM.b = zeros(3,3,3);
-DCM.b(1,2,1) = 1; % rBA2 -> left_temporal_pole for Stim
-DCM.b(1,3,1) = 1; % rBA2 -> right_insula for Stim
-DCM.c = [0, 0, 1;  % Driving input 3 affects `rBA2`
-         0, 0, 0;  % No input to `left_temporal_pole`
-         0, 0, 0]; % No input to `right_insula`
-% 
- save(fullfile(data_path,'GLM','DCM_m2_StimBU.mat'),'DCM');
- 
- %  Connectivity matrices for Model 2: Stim TD only
-%--------------------------------------------------------------------------
-DCM.b = zeros(3,3,3);
-DCM.b(2,1,1) = 1; % left_temporal_pole -> rBA2 for Stim
-DCM.b(3,1,1) = 1; % right_insula -> rBA2 for Stim
-DCM.c = [0, 0, 1;  % Driving input 3 affects `rBA2`
-         0, 0, 0;  % No input to `left_temporal_pole`
-         0, 0, 0]; % No input to `right_insula`
-% 
- save(fullfile(data_path,'GLM','DCM_null_model.mat'),'DCM');
-
- %  Connectivity matrices for Model 3: Stim BU and Stim TD
-%--------------------------------------------------------------------------
-DCM.b = zeros(3,3,3);
-DCM.b(1,2,1) = 1; % rBA2 -> left_temporal_pole for Stim
-DCM.b(1,3,1) = 1; % rBA2 -> right_insula for Stim
-DCM.b(2,1,1) = 1; % left_temporal_pole -> rBA2 for Stim
-DCM.b(3,1,1) = 1; % right_insula -> rBA2 for Stim
-DCM.c = [0, 0, 1;  % Driving input 3 affects `rBA2`
-         0, 0, 0;  % No input to `left_temporal_pole`
-         0, 0, 0]; % No input to `right_insula`
-% 
- save(fullfile(data_path,'GLM','DCM_null_model.mat'),'DCM');
-
-  %  Connectivity matrices for Model 4: Imag BU only
-%--------------------------------------------------------------------------
-DCM.b = zeros(3,3,3);
-DCM.b(1,2,2) = 1; % rBA2 -> left_temporal_pole for Imag
-DCM.b(1,3,2) = 1; % rBA2 -> right_insula for Imag
-DCM.c = [0, 0, 1;  % Driving input 3 affects `rBA2`
-         0, 0, 0;  % No input to `left_temporal_pole`
-         0, 0, 0]; % No input to `right_insula`
-% 
- save(fullfile(data_path,'GLM','DCM_null_model.mat'),'DCM');
-
-   %  Connectivity matrices for Model 5: Stim BU and Imag BU
-%--------------------------------------------------------------------------
-DCM.b = zeros(3,3,3);
-DCM.b(1,2,1) = 1; % rBA2 -> left_temporal_pole for Stim
-DCM.b(1,3,1) = 1; % rBA2 -> right_insula for Stim
-DCM.b(1,2,2) = 1; % rBA2 -> left_temporal_pole for Imag
-DCM.b(1,3,2) = 1; % rBA2 -> right_insula for Imag
-DCM.c = [0, 0, 1;  % Driving input 3 affects `rBA2`
-         0, 0, 0;  % No input to `left_temporal_pole`
-         0, 0, 0]; % No input to `right_insula`
-% 
- save(fullfile(data_path,'GLM','DCM_null_model.mat'),'DCM');
-
- %  Connectivity matrices for Model 6: Stim TD and Imag BU
-%--------------------------------------------------------------------------
-DCM.b = zeros(3,3,3);
-DCM.b(2,1,1) = 1; % left_temporal_pole -> rBA2 for Stim
-DCM.b(3,1,1) = 1; % right_insula -> rBA2 for Stim
-DCM.b(1,2,2) = 1; % rBA2 -> left_temporal_pole for Imag
-DCM.b(1,3,2) = 1; % rBA2 -> right_insula for Imag
-DCM.c = [0, 0, 1;  % Driving input 3 affects `rBA2`
-         0, 0, 0;  % No input to `left_temporal_pole`
-         0, 0, 0]; % No input to `right_insula`
-% 
- save(fullfile(data_path,'GLM','DCM_null_model.mat'),'DCM');
-
- %  Connectivity matrices for Model 7: Stim BU, Stim TD, and Imag BU
-%--------------------------------------------------------------------------
-DCM.b = zeros(3,3,3);
-DCM.b(1,2,1) = 1; % rBA2 -> left_temporal_pole for Stim
-DCM.b(1,3,1) = 1; % rBA2 -> right_insula for Stim
-DCM.b(2,1,1) = 1; % left_temporal_pole -> rBA2 for Stim
-DCM.b(3,1,1) = 1; % right_insula -> rBA2 for Stim
-DCM.b(1,2,2) = 1; % rBA2 -> left_temporal_pole for Imag
-DCM.b(1,3,2) = 1; % rBA2 -> right_insula for Imag
-DCM.c = [0, 0, 1;  % Driving input 3 affects `rBA2`
-         0, 0, 0;  % No input to `left_temporal_pole`
-         0, 0, 0]; % No input to `right_insula`
-% 
- save(fullfile(data_path,'GLM','DCM_null_model.mat'),'DCM');
-
- %  Connectivity matrices for Model 8: Imag TD only
-%--------------------------------------------------------------------------
-DCM.b = zeros(3,3,3);
-DCM.b(2,1,2) = 1; % left_temporal_pole -> rBA2 for Imag
-DCM.b(3,1,2) = 1; % right_insula -> rBA2 for Imag
-DCM.c = [0, 0, 1;  % Driving input 3 affects `rBA2`
-         0, 0, 0;  % No input to `left_temporal_pole`
-         0, 0, 0]; % No input to `right_insula`
-% 
- save(fullfile(data_path,'GLM','DCM_null_model.mat'),'DCM');
-
- %  Connectivity matrices for Model 9: Stim BU and Imag TD
-%--------------------------------------------------------------------------
-DCM.b = zeros(3,3,3);
-DCM.b(2,1,2) = 1; % left_temporal_pole -> rBA2 for Imag
-DCM.b(3,1,2) = 1; % right_insula -> rBA2 for Imag
-DCM.c = [0, 0, 1;  % Driving input 3 affects `rBA2`
-         0, 0, 0;  % No input to `left_temporal_pole`
-         0, 0, 0]; % No input to `right_insula`
-% 
- save(fullfile(data_path,'GLM','DCM_null_model.mat'),'DCM');
+ save(fullfile(DCM_folder_path,'DCM_m1_null.mat'),'DCM');
 
 % Connectivity matrices for full model
-%--------------------------------------------------------------------------
+% --------------------------------------------------------------------------
 DCM.a = [1,1,1;1,1,0;1,0,1];
 DCM.b = zeros(3,3,3); 
 DCM.b = zeros(3,3,3); DCM.b(1,2,1) = 1; DCM.b(1,3,1) = 1; DCM.b(2,1,1) = 1; DCM.b(3,1,1) = 1; DCM.b(1,2,2) = 1; DCM.b(1,3,2) = 1; DCM.b(2,1,2) = 1; DCM.b(3,1,2) = 1; % Defining non-zero entries in 3D matrix B
 DCM.c = [0,0,1;0,0,1;0,0,1];
 DCM.d = [];
 
-save(fullfile(DCM_folder_path,'DCM_full_model.mat'),'DCM');
+save(fullfile(DCM_folder_path,'DCM_m16_full.mat'),'DCM');
+
+clear matlabbatch
+
+matlabbatch = [];
+matlabbatch{1}.spm.dcm.fmri.estimate.dcmmat = {...
+    fullfile(DCM_folder_path, 'DCM_full_model.mat')}; ...
+
+spm_jobman('run',matlabbatch);
+
 end

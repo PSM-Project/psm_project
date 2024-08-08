@@ -45,13 +45,13 @@ matlabbatch{1}.spm.util.voi.name = 'rBA2';
 matlabbatch{1}.spm.util.voi.roi{1}.spm.spmmat = {''}; % using SPM.mat above
 matlabbatch{1}.spm.util.voi.roi{1}.spm.contrast = [1 2];  
 matlabbatch{1}.spm.util.voi.roi{1}.spm.threshdesc = 'none';
-matlabbatch{1}.spm.util.voi.roi{1}.spm.thresh = 0.001;
+matlabbatch{1}.spm.util.voi.roi{1}.spm.thresh = 0.005;
 matlabbatch{1}.spm.util.voi.roi{1}.spm.extent = 0;
 
  % Search for nearest voxel if no activation found
 matlabbatch{1}.spm.util.voi.roi{2}.sphere.centre = [44 -40 60]; % Initial coordinates
 matlabbatch{1}.spm.util.voi.roi{2}.sphere.radius = 8; % Initial search radius
-matlabbatch{1}.spm.util.voi.roi{2}.sphere.move.local.spm = 1; % Allow SPM to find nearest voxel
+matlabbatch{1}.spm.util.voi.roi{2}.sphere.move.fixed = 1;
 matlabbatch{1}.spm.util.voi.expression = 'i1 & i2';
 
 % EXTRACTING TIME SERIES: left temporal pole
@@ -63,13 +63,12 @@ matlabbatch{2}.spm.util.voi.name = 'left_temporal_pole';
 matlabbatch{2}.spm.util.voi.roi{1}.spm.spmmat = {''}; % using SPM.mat above
 matlabbatch{2}.spm.util.voi.roi{1}.spm.contrast = [1 2];  
 matlabbatch{2}.spm.util.voi.roi{1}.spm.threshdesc = 'none';
-matlabbatch{2}.spm.util.voi.roi{1}.spm.thresh = 0.001;
+matlabbatch{2}.spm.util.voi.roi{1}.spm.thresh = 0.005;
 matlabbatch{2}.spm.util.voi.roi{1}.spm.extent = 0;
 
- % Search for nearest voxel if no activation found
-matlabbatch{2}.spm.util.voi.roi{2}.sphere.centre = [58 6 2]; % Initial coordinates
+matlabbatch{2}.spm.util.voi.roi{2}.sphere.centre = [-58 6 2]; % Initial coordinates
 matlabbatch{2}.spm.util.voi.roi{2}.sphere.radius = 8; % Initial search radius
-matlabbatch{2}.spm.util.voi.roi{2}.sphere.move.local.spm = 1; % Allow SPM to find nearest voxel
+matlabbatch{1}.spm.util.voi.roi{2}.sphere.move.fixed = 1;
 matlabbatch{2}.spm.util.voi.expression = 'i1 & i2';
 
 % EXTRACTING TIME SERIES: right insula
@@ -81,13 +80,13 @@ matlabbatch{3}.spm.util.voi.name = 'right_insula';
 matlabbatch{3}.spm.util.voi.roi{1}.spm.spmmat = {''}; % using SPM.mat above
 matlabbatch{3}.spm.util.voi.roi{1}.spm.contrast = [1 2];  
 matlabbatch{3}.spm.util.voi.roi{1}.spm.threshdesc = 'none';
-matlabbatch{3}.spm.util.voi.roi{1}.spm.thresh = 0.001;
+matlabbatch{3}.spm.util.voi.roi{1}.spm.thresh = 0.005;
 matlabbatch{3}.spm.util.voi.roi{1}.spm.extent = 0;
 
  % Search for nearest voxel if no activation found
-matlabbatch{3}.spm.util.voi.roi{2}.sphere.centre = [60 10 2]; % Initial coordinates
+matlabbatch{3}.spm.util.voi.roi{2}.sphere.centre = [60 10 -2]; % Initial coordinates
 matlabbatch{3}.spm.util.voi.roi{2}.sphere.radius = 8; % Initial search radius
-matlabbatch{3}.spm.util.voi.roi{2}.sphere.move.local.spm = 1; % Allow SPM to find nearest voxel
+matlabbatch{1}.spm.util.voi.roi{2}.sphere.move.fixed = 1;
 matlabbatch{3}.spm.util.voi.expression = 'i1 & i2';
 
 spm_jobman('run',matlabbatch);

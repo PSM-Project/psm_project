@@ -71,7 +71,7 @@ DCM.Y.Q    = spm_Ce(ones(1,DCM.n)*DCM.v);
 DCM.U.dt = SPM.Sess(1).U(1).dt;
 
 % Concatenate input names from all sessions
-DCM.U.name = {'Stimulation', 'Imagery', 'Task'}; % Ensure names are correctly concatenated
+DCM.U.name = [SPM.Sess(1).U.name]; % Ensure names are correctly concatenated
 
 % Concatenate input values from all sessions, using the entire matrix
 DCM.U.u = [SPM.Sess(1).U(1).u; ...
@@ -86,33 +86,28 @@ DCM.TE     = 0.03; % Define TE (3000ms)
 DCM.options.nonlinear  = 0; % Bilinear modulation
 DCM.options.two_state  = 0; % One-state
 DCM.options.stochastic = 0; % No stochastic effects
-DCM.options.nograph    = 1; %
+DCM.options.centre = 0;
+DCM.options.analysis = 'timeseries';
+DCM.options.nograph = 1;
 
 %  Connectivity matrices for null model
 %--------------------------------------------------------------------------
+DCM.a = [1,1,1;1,1,0;1,0,1];
 DCM.b = zeros(3,3,3); % No modulation
 DCM.c = [0, 0, 1;  % Driving input 3 affects `rBA2`
          0, 0, 0;  % No input to `left_temporal_pole`
          0, 0, 0]; % No input to `right_insula`
+DCM.d = [];
 % 
  save(fullfile(DCM_folder_path,'DCM_m1_null.mat'),'DCM');
 
 % Connectivity matrices for full model
 % --------------------------------------------------------------------------
 DCM.a = [1,1,1;1,1,0;1,0,1];
-DCM.b = zeros(3,3,3); 
 DCM.b = zeros(3,3,3); DCM.b(1,2,1) = 1; DCM.b(1,3,1) = 1; DCM.b(2,1,1) = 1; DCM.b(3,1,1) = 1; DCM.b(1,2,2) = 1; DCM.b(1,3,2) = 1; DCM.b(2,1,2) = 1; DCM.b(3,1,2) = 1; % Defining non-zero entries in 3D matrix B
 DCM.c = [0,0,1;0,0,1;0,0,1];
 DCM.d = [];
 
 save(fullfile(DCM_folder_path,'DCM_m16_full.mat'),'DCM');
-
-clear matlabbatch
-
-matlabbatch = [];
-matlabbatch{1}.spm.dcm.fmri.estimate.dcmmat = {...
-    fullfile(DCM_folder_path, 'DCM_full_model.mat')}; ...
-
-spm_jobman('run',matlabbatch);
 
 end

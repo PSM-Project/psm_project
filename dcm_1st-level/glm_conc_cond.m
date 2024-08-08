@@ -12,7 +12,7 @@ spm('defaults', 'fmri')
 spm_jobman('initcfg')
 
 % specifying data, participant and run paths
-subject_folder = {'sub-001' 'sub-002'};
+subject_folder = {'sub-004' 'sub-005'};
 run_folder = {'run-01' 'run-02' 'run-03' 'run-04' 'run-05' 'run-06'};
 
 

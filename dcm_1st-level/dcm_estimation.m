@@ -13,7 +13,7 @@ spm('defaults', 'fmri')
 spm_jobman('initcfg')
 
 % specifying data, participant and run paths
-subject_folder = {'sub-001' 'sub-002'};
+subject_folder = {'sub-002'};
 
 %% DCM Estimation
 for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folder_sub
@@ -31,7 +31,7 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
 
 matlabbatch = [];
 matlabbatch{1}.spm.dcm.fmri.estimate.dcmmat = {...
-    fullfile(DCM_folder_path, 'DCM_m1_null.mat') ...
+    % fullfile(DCM_folder_path, 'DCM_m1_null.mat') ...
     fullfile(DCM_folder_path,'DCM_m16_full.mat')}; ...
 
 spm_jobman('run',matlabbatch);

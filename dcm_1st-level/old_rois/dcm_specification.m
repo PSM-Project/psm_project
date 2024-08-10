@@ -12,7 +12,7 @@ spm('defaults', 'fmri')
 spm_jobman('initcfg')
 
 % specifying data, participant and run paths
-subject_folder = {'sub-001'};
+subject_folder = {'sub-006' 'sub-007' 'sub-008' 'sub-009' 'sub-0010'};
 %% Specify DCM Models
 % Modified from the Attention batch script
 for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folder_sub

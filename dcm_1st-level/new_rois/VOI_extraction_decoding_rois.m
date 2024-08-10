@@ -13,7 +13,7 @@ spm('defaults', 'fmri')
 spm_jobman('initcfg')
 
 % specifying data, participant and run paths
-subject_folder = {'sub-001' 'sub-002' 'sub-003' 'sub-004' 'sub-005'};
+subject_folder = {'sub-006' 'sub-007' 'sub-008' 'sub-009' 'sub-010'};
 
 %%
 for i = 1:numel(subject_folder) % for loop from 1 to number of elements in folder_sub

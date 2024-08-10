@@ -12,7 +12,7 @@ spm('defaults', 'fmri')
 spm_jobman('initcfg')
 
 % specifying data, participant and run paths
-subject_folder = {'sub-001' 'sub-002' 'sub-003' 'sub-004' 'sub-005'};
+subject_folder = {'sub-006' 'sub-007' 'sub-008' 'sub-009' 'sub-010'};
 run_folder = {'run-01'};
 
 
@@ -22,7 +22,6 @@ for i = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
     S = []; % init empty structure
     S.data_folder_path = data_folder_path; % add data folder path
     S.subject_folder = subject_folder{i}; % add subject path
-    S.run_folder = run_folder{j}; % add run path
 
     glm_folder_path = fullfile(S.data_folder_path, S.subject_folder, 'GLM');     % defining GLM folder path
 

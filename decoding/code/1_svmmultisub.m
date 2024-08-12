@@ -11,10 +11,12 @@
 
 % Add The Decoding Toolbox and SPM to your Matlab path 
 % TDT
-addpath('C:\Users\User\Documents\MATLAB\decoding_toolbox')
+tdt_path = 'C:\Users\User\Documents\MATLAB\decoding_toolbox'
+addpath(tdt_path)
 assert(~isempty(which('decoding_defaults.m', 'function')), 'TDT not found in path, please add')
 % SPM
-addpath('C:\Users\User\Documents\MATLAB\spm12')
+spm_path = 'C:\Users\User\Documents\MATLAB\spm12'
+addpath(spm_path)
 assert((~isempty(which('spm.m', 'function')) || ~isempty(which('BrikInfo.m', 'function'))) , 'Neither SPM nor AFNI found in path, please add (or remove this assert if you really dont need to read brain images)')
 
 % set the configuartion structure and the analysis type
@@ -36,8 +38,8 @@ cfg.searchlight.radius = 3;
 
 % generate as many subject IDs as you have subjects to analyze
 subids = generate_subids(10); 
-% assign the folder which contains you data a variable for more compact
-% coding
+% assign the folder which contains your data
+
 base_dir = 'C:\data\Decoding';
 
 % create an empty variable to eventually create subject specific result

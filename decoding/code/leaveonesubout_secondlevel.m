@@ -1,9 +1,11 @@
 % This script builts on the results from the svmmultisub.m and does a
-% specifity analysis as proposed by PAPER EINFÜGEN, to test if ...
-% For this, the second-level-GLM and t-contrast are estimated in a leave
+% specifity analysis as proposed by Etzel et al. (2013), to test if the between-subject variation is 
+% greater than the searchlight radius.
+% To achieve this, the second-level-GLM and t-contrast are estimated in a leave
 % one subject out fashion.
 
-%% specification
+% model specification
+%-----------------------------------------------------------------------------------------
 % Store all the accuracy maps from the decoding anaylsis in a variable
 scans = {
     'C:\data\Decoding\results_ldamultisub\sub-001\res_accuracy_minus_chance.nii,1'
@@ -56,7 +58,8 @@ for i = 1:10
     
 end
 
-%% model estimaton 
+% model estimaton 
+%-----------------------------------------------------------------------------------------
 
 % List to store paths to the SPM.mat files
 spmmat_paths = cell(1, 10);
@@ -85,7 +88,8 @@ for i = 1:10
     spm_jobman('run', matlabbatch);
 end
 
-%% t-contrast 
+% estimate the t-contrast 
+%-----------------------------------------------------------------------------------------
 
 spmmat_paths = cell(1, 10);
 for i = 1:10

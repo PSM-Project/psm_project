@@ -5,7 +5,9 @@
 % computes a one-sample-t-test to test in which brain regions the
 % classifier classifies the Imagery vs Stimulus conditions above chance
 
-%% model specification
+% model specification
+%-----------------------------------------------------------------------------------------
+
 clear matlabbatch 
 
 matlabbatch{1}.spm.stats.factorial_design.dir = {'C:\data\Decoding\groupresults_svm'};
@@ -33,7 +35,9 @@ matlabbatch{1}.spm.stats.factorial_design.globalm.glonorm = 1;
 
 spm_jobman('run', matlabbatch);
 
-%% model estmation
+% model estmation
+%-----------------------------------------------------------------------------------------
+
 clear matlabbatch
 matlabbatch{1}.spm.stats.fmri_est.spmmat = {'C:\data\Decoding\groupresults_svm\SPM.mat'};
 matlabbatch{1}.spm.stats.fmri_est.write_residuals = 0;
@@ -41,7 +45,8 @@ matlabbatch{1}.spm.stats.fmri_est.method.Classical = 1;
 
 spm_jobman('run', matlabbatch);
 
-%% compute the t-contrast
+% estimating the t-contrast
+%-----------------------------------------------------------------------------------------
 
 clear matlabbatch
 

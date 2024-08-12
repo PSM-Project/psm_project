@@ -12,7 +12,7 @@ spm('defaults', 'fmri')
 spm_jobman('initcfg')
 
 % specifying data, participant and run paths
-subject_folder = {'sub-002' 'sub-003' 'sub-004' 'sub-005'};
+subject_folder = {'sub-001' 'sub-002' 'sub-003' 'sub-004' 'sub-005' 'sub-006' 'sub-007' 'sub-009' 'sub-010'};
 %% Specify DCM Models
 % Modified from the Attention batch script
 for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folder_sub
@@ -86,12 +86,12 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
 
     %  Connectivity matrices for Null Model (m2)
     %--------------------------------------------------------------------------
-    DCM.a = [1,1,0;1,1,1;0,1,1]; % A-matrix (connectivity)
+    DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity): S1 receives input from: S2; S2 receives input from S1 and IPL; IPL receives input from S2
 
     DCM.b(:,:,1) = [0,0,0;0,0,0;0,0,0]; % No modulation
     DCM.b(:,:,2) = [0,0,0;0,0,0;0,0,0];
 
-    DCM.c = [1,1;0,0;0,0];  % C-matrix (input effects)
+    DCM.c = [1,1;0,0;0,0];  % C-matrix (input effects): both stimulation and imagery have direct effects to S1
    
     DCM.d = zeros(3,3,0); % D-matrix (non-linear effects)
     %
@@ -99,7 +99,7 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
 
     %  Connectivity matrices for Model 2: Stim BU only 
     %--------------------------------------------------------------------------
-   DCM.a = [1,1,0;1,1,1;0,1,1]; % A-matrix (connectivity)
+   DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
     
     DCM.b(:,:,1) = [0,0,0;1,0,0;0,1,0]; % B-matrix (modulation for stim)
     DCM.b(:,:,2) = [0,0,0;0,0,0;0,0,0]; % B-matrix (modulation for imag)
@@ -113,10 +113,10 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
 
      %  Connectivity matrices for Model 3: Stim TD only
     %--------------------------------------------------------------------------
-    DCM.a = [1,1,0;1,1,1;0,1,1]; % A-matrix (connectivity)
+    DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
     DCM.b(:,:,1) = [0,1,0;0,0,1;0,0,0]; % B-matrix (modulation for stim)
-    DCM.b(:,:,2) = [0,0,0;0,0,0;0,0,0]'; % B-matrix (modulation for imag)
+    DCM.b(:,:,2) = [0,0,0;0,0,0;0,0,0]; % B-matrix (modulation for imag)
 
     DCM.c = [1,1;0,0;0,0];  % C-matrix (input effects)
 
@@ -127,7 +127,7 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
 
     %  Connectivity matrices for Model 4: Stim BU and Stim TD
     %--------------------------------------------------------------------------
-     DCM.a = [1,1,0;1,1,1;0,1,1]; % A-matrix (connectivity)
+     DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
     DCM.b(:,:,1) = [0,1,0;1,0,1;0,1,0]; % B-matrix (modulation for stim)
     DCM.b(:,:,2) = [0,0,0;0,0,0;0,0,0]; % B-matrix (modulation for imag)
@@ -141,7 +141,7 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
 
     %  Connectivity matrices for Model 5: Imag BU only
     %--------------------------------------------------------------------------
-     DCM.a = [1,1,0;1,1,1;0,1,1]; % A-matrix (connectivity)
+     DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
     DCM.b(:,:,1) = [0,0,0;0,0,0;0,0,0]; % B-matrix (modulation for stim)
     DCM.b(:,:,2) = [0,0,0;1,0,0;0,1,0]; % B-matrix (modulation for imag)
@@ -155,7 +155,7 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
 
     %  Connectivity matrices for Model 6: Stim BU and Imag BU
     %--------------------------------------------------------------------------
-     DCM.a = [1,1,0;1,1,1;0,1,1]; % A-matrix (connectivity)
+     DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
     DCM.b(:,:,1) = [0,0,0;1,0,0;0,1,0]; % B-matrix (modulation for stim)
     DCM.b(:,:,2) = [0,0,0;1,0,0;0,1,0]; % B-matrix (modulation for imag)
@@ -169,7 +169,7 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
 
     %  Connectivity matrices for Model 7: Stim TD and Imag BU
     %--------------------------------------------------------------------------
-     DCM.a = [1,1,0;1,1,1;0,1,1]; % A-matrix (connectivity)
+     DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
     DCM.b(:,:,1) = [0,1,0;0,0,1;0,0,0]; % B-matrix (modulation for stim)
     DCM.b(:,:,2) = [0,0,0;1,0,0;0,1,0]; % B-matrix (modulation for imag)
@@ -183,7 +183,7 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
 
     %  Connectivity matrices for Model 8: Stim BU, Stim TD, and Imag BU
     %--------------------------------------------------------------------------
-     DCM.a = [1,1,0;1,1,1;0,1,1]; % A-matrix (connectivity)
+     DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
     DCM.b(:,:,1) = [0,1,0;1,0,1;0,1,0]; % B-matrix (modulation for stim)
     DCM.b(:,:,2) = [0,0,0;1,0,0;0,1,0]; % B-matrix (modulation for imag)
@@ -197,7 +197,7 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
 
      %  Connectivity matrices for Model 9: Imag TD only
     %--------------------------------------------------------------------------
-    DCM.a = [1,1,0;1,1,1;0,1,1]; % A-matrix (connectivity)
+    DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
     DCM.b(:,:,1) = [0,0,0;0,0,0;0,0,0]; % B-matrix (modulation for stim)
     DCM.b(:,:,2) = [0,1,0;0,0,1;0,0,0]; % B-matrix (modulation for imag)
@@ -211,7 +211,7 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
 
      %  Connectivity matrices for Model 10: Stim BU and Imag TD
     %--------------------------------------------------------------------------
-      DCM.a = [1,1,0;1,1,1;0,1,1]; % A-matrix (connectivity)
+      DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
      DCM.b(:,:,1) = [0,0,0;1,0,0;0,1,0]; % B-matrix (modulation for stim)
      DCM.b(:,:,2) = [0,1,0;0,0,1;0,0,0]; % B-matrix (modulation for imag)
@@ -225,7 +225,7 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
 
      %  Connectivity matrices for Model 11: Stim TD and Imag TD
     %--------------------------------------------------------------------------
-      DCM.a = [1,1,0;1,1,1;0,1,1]; % A-matrix (connectivity)
+      DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
      DCM.b(:,:,1) = [0,1,0;0,0,1;0,0,0]; % B-matrix (modulation for stim)
      DCM.b(:,:,2) = [0,1,0;0,0,1;0,0,0]; % B-matrix (modulation for imag)
@@ -239,7 +239,7 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
 
     %  Connectivity matrices for Model 12: Stim BU, Stim TD, and Imag TD
     %--------------------------------------------------------------------------
-     DCM.a = [1,1,0;1,1,1;0,1,1]; % A-matrix (connectivity)
+     DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
      DCM.b(:,:,1) = [0,1,0;1,0,1;0,1,0]; % B-matrix (modulation for stim)
      DCM.b(:,:,2) = [0,1,0;0,0,1;0,0,0]; % B-matrix (modulation for imag)
@@ -253,7 +253,7 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
 
     %  Connectivity matrices for Model 13: Imag BU and Imag TD
     %--------------------------------------------------------------------------
-      DCM.a = [1,1,0;1,1,1;0,1,1]; % A-matrix (connectivity)
+      DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
      DCM.b(:,:,1) = [0,0,0;0,0,0;0,0,0]; % B-matrix (modulation for stim)
      DCM.b(:,:,2) = [0,1,0;1,0,1;0,1,0]; % B-matrix (modulation for imag)
@@ -267,9 +267,9 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
 
     %  Connectivity matrices for Model 14: Stim BU, Imag BU, and Imag TD
     %--------------------------------------------------------------------------
-      DCM.a = [1,1,0;1,1,1;0,1,1]; % A-matrix (connectivity)
+      DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
-     DCM.b(:,:,1) = [0,0,0;1,0,0;1,0,0]'; % B-matrix (modulation for stim)
+     DCM.b(:,:,1) = [0,0,0;1,0,0;0,1,0]; % B-matrix (modulation for stim)
      DCM.b(:,:,2) = [0,1,0;1,0,1;0,1,0]; % B-matrix (modulation for imag)
 
     DCM.c = [1,1;0,0;0,0];  % C-matrix (input effects)
@@ -281,7 +281,7 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
 
          %  Connectivity matrices for Model 15: Stim TD, Imag BU, and Imag TD
     %--------------------------------------------------------------------------
-     DCM.a = [1,1,0;1,1,1;0,1,1]; % A-matrix (connectivity)
+     DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
      DCM.b(:,:,1) = [0,1,0;0,0,1;0,0,0]; % B-matrix (modulation for stim)
      DCM.b(:,:,2) = [0,1,0;1,0,1;0,1,0]; % B-matrix (modulation for imag)
@@ -295,7 +295,7 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
 
       %  Connectivity matrices for full model (m16)
     %--------------------------------------------------------------------------    
-     DCM.a = [1,1,0;1,1,1;0,1,1]; % A-matrix (connectivity)
+     DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
    
     DCM.b(:,:,1) = [0,1,0;1,0,1;0,1,0]; % B-matrix (modulation for stim)
     DCM.b(:,:,2) = [0,1,0;1,0,1;0,1,0]; % B-matrix (modulation for imag)

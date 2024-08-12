@@ -11,9 +11,12 @@
 % the 10 participants.
 
 
-%% get the accuracy above chance for the first two significant clusters with the highest voxel size 
+% get the accuracy above chance for the first two significant clusters with the highest voxel size 
+%-----------------------------------------------------------------------------------------
 
-%% CLUSTER 1 - 
+% CLUSTER 1 
+%-----------------------------------------------------------------------------------------
+
 % calculate the mean accuarcy above chance for each participant
 mean_accuracy1 = mean(y_clus1,2);
 
@@ -23,7 +26,10 @@ mean_accuracy_overall1 = mean(mean_accuracy1);
 % calulate the standard deviation
 std_accuracy1 = std(mean(y_clus1,1));ad
 
-%% CLUSTER 2 
+
+% CLUSTER 2 
+%-----------------------------------------------------------------------------------------
+
 % calculate the mean accuarcy above chance for each participant
 mean_accuracy2 = mean(y_clus2,2);
 
@@ -33,7 +39,10 @@ mean_accuracy_overall2 = mean(mean_accuracy2);
 % calulate the standard deviation
 std_accuracy2 = std(mean(y_clus2,1));
 
-%% CLUSTER 4
+
+% CLUSTER 4
+%-----------------------------------------------------------------------------------------
+
 % calculate the mean accuarcy above chance for each participant
 mean_accuracy3 = mean(y_clus4,2);
 

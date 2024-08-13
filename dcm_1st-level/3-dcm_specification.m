@@ -1,3 +1,9 @@
+% DCM Specification
+% This script takes the GLM and VOI data to specify the matrices of our DCM
+% models. Received help from SPM12 manual attention dataset.
+% Angela Seo
+%-----------------------------------------------------------------------------------------
+
 % initializing SPM
 spm_path = '/Users/angelaseo/Documents/spm-main'; % Enter the path of your SPM folder
 
@@ -92,26 +98,26 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
     DCM.b(:,:,2) = [0,0,0;0,0,0;0,0,0];
 
     DCM.c = [1,1;0,0;0,0];  % C-matrix (input effects): both stimulation and imagery have direct effects to S1
-   
+
     DCM.d = zeros(3,3,0); % D-matrix (non-linear effects)
     %
-     save(fullfile(DCM_folder_path,'DCM_m1_null.mat'),'DCM');
+    save(fullfile(DCM_folder_path,'DCM_m1_null.mat'),'DCM');
 
-    %  Connectivity matrices for Model 2: Stim BU only 
+    %  Connectivity matrices for Model 2: Stim BU only
     %--------------------------------------------------------------------------
-   DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
-    
+    DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
+
     DCM.b(:,:,1) = [0,0,0;1,0,0;0,1,0]; % B-matrix (modulation for stim)
     DCM.b(:,:,2) = [0,0,0;0,0,0;0,0,0]; % B-matrix (modulation for imag)
 
     DCM.c = [1,1;0,0;0,0];  % C-matrix (input effects)
-   
-    DCM.d = zeros(3,3,0); % D-matrix (non-linear effects)
-  
-    %
-     save(fullfile(DCM_folder_path,'DCM_m2_stimBU.mat'),'DCM');
 
-     %  Connectivity matrices for Model 3: Stim TD only
+    DCM.d = zeros(3,3,0); % D-matrix (non-linear effects)
+
+    %
+    save(fullfile(DCM_folder_path,'DCM_m2_stimBU.mat'),'DCM');
+
+    %  Connectivity matrices for Model 3: Stim TD only
     %--------------------------------------------------------------------------
     DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
@@ -123,25 +129,25 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
     DCM.d = zeros(3,3,0); % D-matrix (non-linear effects)
 
     %
-     save(fullfile(DCM_folder_path,'DCM_m3_stimTD.mat'),'DCM');
+    save(fullfile(DCM_folder_path,'DCM_m3_stimTD.mat'),'DCM');
 
     %  Connectivity matrices for Model 4: Stim BU and Stim TD
     %--------------------------------------------------------------------------
-     DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
+    DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
     DCM.b(:,:,1) = [0,1,0;1,0,1;0,1,0]; % B-matrix (modulation for stim)
     DCM.b(:,:,2) = [0,0,0;0,0,0;0,0,0]; % B-matrix (modulation for imag)
 
-   DCM.c = [1,1;0,0;0,0];  % C-matrix (input effects)
+    DCM.c = [1,1;0,0;0,0];  % C-matrix (input effects)
 
     DCM.d = zeros(3,3,0); % D-matrix (non-linear effects)
 
     %
-     save(fullfile(DCM_folder_path,'DCM_m4_stimBU_stimTD.mat'),'DCM');
+    save(fullfile(DCM_folder_path,'DCM_m4_stimBU_stimTD.mat'),'DCM');
 
     %  Connectivity matrices for Model 5: Imag BU only
     %--------------------------------------------------------------------------
-     DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
+    DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
     DCM.b(:,:,1) = [0,0,0;0,0,0;0,0,0]; % B-matrix (modulation for stim)
     DCM.b(:,:,2) = [0,0,0;1,0,0;0,1,0]; % B-matrix (modulation for imag)
@@ -151,11 +157,11 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
     DCM.d = zeros(3,3,0); % D-matrix (non-linear effects)
 
     %
-     save(fullfile(DCM_folder_path,'DCM_m5_imagBU.mat'),'DCM');
+    save(fullfile(DCM_folder_path,'DCM_m5_imagBU.mat'),'DCM');
 
     %  Connectivity matrices for Model 6: Stim BU and Imag BU
     %--------------------------------------------------------------------------
-     DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
+    DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
     DCM.b(:,:,1) = [0,0,0;1,0,0;0,1,0]; % B-matrix (modulation for stim)
     DCM.b(:,:,2) = [0,0,0;1,0,0;0,1,0]; % B-matrix (modulation for imag)
@@ -165,11 +171,11 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
     DCM.d = zeros(3,3,0); % D-matrix (non-linear effects)
 
     %
-     save(fullfile(DCM_folder_path,'DCM_m6_stimBU_imagBU.mat'),'DCM');
+    save(fullfile(DCM_folder_path,'DCM_m6_stimBU_imagBU.mat'),'DCM');
 
     %  Connectivity matrices for Model 7: Stim TD and Imag BU
     %--------------------------------------------------------------------------
-     DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
+    DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
     DCM.b(:,:,1) = [0,1,0;0,0,1;0,0,0]; % B-matrix (modulation for stim)
     DCM.b(:,:,2) = [0,0,0;1,0,0;0,1,0]; % B-matrix (modulation for imag)
@@ -179,11 +185,11 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
     DCM.d = zeros(3,3,0); % D-matrix (non-linear effects)
 
     %
-     save(fullfile(DCM_folder_path,'DCM_m7_stimTD_imagBU.mat'),'DCM');
+    save(fullfile(DCM_folder_path,'DCM_m7_stimTD_imagBU.mat'),'DCM');
 
     %  Connectivity matrices for Model 8: Stim BU, Stim TD, and Imag BU
     %--------------------------------------------------------------------------
-     DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
+    DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
     DCM.b(:,:,1) = [0,1,0;1,0,1;0,1,0]; % B-matrix (modulation for stim)
     DCM.b(:,:,2) = [0,0,0;1,0,0;0,1,0]; % B-matrix (modulation for imag)
@@ -193,115 +199,115 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
     DCM.d = zeros(3,3,0); % D-matrix (non-linear effects)
 
     %
-     save(fullfile(DCM_folder_path,'DCM_m8_stimBU_stimTD_imagBU.mat'),'DCM');
+    save(fullfile(DCM_folder_path,'DCM_m8_stimBU_stimTD_imagBU.mat'),'DCM');
 
-     %  Connectivity matrices for Model 9: Imag TD only
+    %  Connectivity matrices for Model 9: Imag TD only
     %--------------------------------------------------------------------------
     DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
     DCM.b(:,:,1) = [0,0,0;0,0,0;0,0,0]; % B-matrix (modulation for stim)
     DCM.b(:,:,2) = [0,1,0;0,0,1;0,0,0]; % B-matrix (modulation for imag)
 
-   DCM.c = [1,1;0,0;0,0];  % C-matrix (input effects)
+    DCM.c = [1,1;0,0;0,0];  % C-matrix (input effects)
 
     DCM.d = zeros(3,3,0); % D-matrix (non-linear effects)
 
     %
-     save(fullfile(DCM_folder_path,'DCM_m9_imagTD.mat'),'DCM');
+    save(fullfile(DCM_folder_path,'DCM_m9_imagTD.mat'),'DCM');
 
-     %  Connectivity matrices for Model 10: Stim BU and Imag TD
+    %  Connectivity matrices for Model 10: Stim BU and Imag TD
     %--------------------------------------------------------------------------
-      DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
+    DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
-     DCM.b(:,:,1) = [0,0,0;1,0,0;0,1,0]; % B-matrix (modulation for stim)
-     DCM.b(:,:,2) = [0,1,0;0,0,1;0,0,0]; % B-matrix (modulation for imag)
+    DCM.b(:,:,1) = [0,0,0;1,0,0;0,1,0]; % B-matrix (modulation for stim)
+    DCM.b(:,:,2) = [0,1,0;0,0,1;0,0,0]; % B-matrix (modulation for imag)
 
     DCM.c = [1,1;0,0;0,0];  % C-matrix (input effects)
 
     DCM.d = zeros(3,3,0); % D-matrix (non-linear effects)
 
     %
-     save(fullfile(DCM_folder_path,'DCM_m10_stimBU_imagTD.mat'),'DCM');
+    save(fullfile(DCM_folder_path,'DCM_m10_stimBU_imagTD.mat'),'DCM');
 
-     %  Connectivity matrices for Model 11: Stim TD and Imag TD
+    %  Connectivity matrices for Model 11: Stim TD and Imag TD
     %--------------------------------------------------------------------------
-      DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
+    DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
-     DCM.b(:,:,1) = [0,1,0;0,0,1;0,0,0]; % B-matrix (modulation for stim)
-     DCM.b(:,:,2) = [0,1,0;0,0,1;0,0,0]; % B-matrix (modulation for imag)
+    DCM.b(:,:,1) = [0,1,0;0,0,1;0,0,0]; % B-matrix (modulation for stim)
+    DCM.b(:,:,2) = [0,1,0;0,0,1;0,0,0]; % B-matrix (modulation for imag)
 
-     DCM.c = [1,1;0,0;0,0];  % C-matrix (input effects)
+    DCM.c = [1,1;0,0;0,0];  % C-matrix (input effects)
 
-     DCM.d = zeros(3,3,0); % D-matrix (non-linear effects)
+    DCM.d = zeros(3,3,0); % D-matrix (non-linear effects)
 
     %
-     save(fullfile(DCM_folder_path,'DCM_m11_stimTD_imagTD.mat'),'DCM');
+    save(fullfile(DCM_folder_path,'DCM_m11_stimTD_imagTD.mat'),'DCM');
 
     %  Connectivity matrices for Model 12: Stim BU, Stim TD, and Imag TD
     %--------------------------------------------------------------------------
-     DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
+    DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
-     DCM.b(:,:,1) = [0,1,0;1,0,1;0,1,0]; % B-matrix (modulation for stim)
-     DCM.b(:,:,2) = [0,1,0;0,0,1;0,0,0]; % B-matrix (modulation for imag)
+    DCM.b(:,:,1) = [0,1,0;1,0,1;0,1,0]; % B-matrix (modulation for stim)
+    DCM.b(:,:,2) = [0,1,0;0,0,1;0,0,0]; % B-matrix (modulation for imag)
 
     DCM.c = [1,1;0,0;0,0];  % C-matrix (input effects)
 
     DCM.d = zeros(3,3,0); % D-matrix (non-linear effects)
 
     %
-     save(fullfile(DCM_folder_path,'DCM_m12_stimBU_stimTD_imagTD.mat'),'DCM');
+    save(fullfile(DCM_folder_path,'DCM_m12_stimBU_stimTD_imagTD.mat'),'DCM');
 
     %  Connectivity matrices for Model 13: Imag BU and Imag TD
     %--------------------------------------------------------------------------
-      DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
+    DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
-     DCM.b(:,:,1) = [0,0,0;0,0,0;0,0,0]; % B-matrix (modulation for stim)
-     DCM.b(:,:,2) = [0,1,0;1,0,1;0,1,0]; % B-matrix (modulation for imag)
+    DCM.b(:,:,1) = [0,0,0;0,0,0;0,0,0]; % B-matrix (modulation for stim)
+    DCM.b(:,:,2) = [0,1,0;1,0,1;0,1,0]; % B-matrix (modulation for imag)
 
-     DCM.c = [1,1;0,0;0,0];  % C-matrix (input effects)
+    DCM.c = [1,1;0,0;0,0];  % C-matrix (input effects)
 
     DCM.d = zeros(3,3,0); % D-matrix (non-linear effects)
 
     %
-     save(fullfile(DCM_folder_path,'DCM_m13_imagBU_imagTD.mat'),'DCM');
+    save(fullfile(DCM_folder_path,'DCM_m13_imagBU_imagTD.mat'),'DCM');
 
     %  Connectivity matrices for Model 14: Stim BU, Imag BU, and Imag TD
     %--------------------------------------------------------------------------
-      DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
+    DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
-     DCM.b(:,:,1) = [0,0,0;1,0,0;0,1,0]; % B-matrix (modulation for stim)
-     DCM.b(:,:,2) = [0,1,0;1,0,1;0,1,0]; % B-matrix (modulation for imag)
+    DCM.b(:,:,1) = [0,0,0;1,0,0;0,1,0]; % B-matrix (modulation for stim)
+    DCM.b(:,:,2) = [0,1,0;1,0,1;0,1,0]; % B-matrix (modulation for imag)
 
     DCM.c = [1,1;0,0;0,0];  % C-matrix (input effects)
 
     DCM.d = zeros(3,3,0); % D-matrix (non-linear effects)
 
     %
-     save(fullfile(DCM_folder_path,'DCM_m14_stimBU_imagBU_imagTD.mat'),'DCM');
+    save(fullfile(DCM_folder_path,'DCM_m14_stimBU_imagBU_imagTD.mat'),'DCM');
 
-         %  Connectivity matrices for Model 15: Stim TD, Imag BU, and Imag TD
+    %  Connectivity matrices for Model 15: Stim TD, Imag BU, and Imag TD
     %--------------------------------------------------------------------------
-     DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
+    DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
 
-     DCM.b(:,:,1) = [0,1,0;0,0,1;0,0,0]; % B-matrix (modulation for stim)
-     DCM.b(:,:,2) = [0,1,0;1,0,1;0,1,0]; % B-matrix (modulation for imag)
+    DCM.b(:,:,1) = [0,1,0;0,0,1;0,0,0]; % B-matrix (modulation for stim)
+    DCM.b(:,:,2) = [0,1,0;1,0,1;0,1,0]; % B-matrix (modulation for imag)
 
     DCM.c = [1,1;0,0;0,0];  % C-matrix (input effects)
 
     DCM.d = zeros(3,3,0); % D-matrix (non-linear effects)
 
     %
-     save(fullfile(DCM_folder_path,'DCM_m15_stimTD_stimBU_imagTD.mat'),'DCM');
+    save(fullfile(DCM_folder_path,'DCM_m15_stimTD_stimBU_imagTD.mat'),'DCM');
 
-      %  Connectivity matrices for full model (m16)
-    %--------------------------------------------------------------------------    
-     DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
-   
+    %  Connectivity matrices for full model (m16)
+    %--------------------------------------------------------------------------
+    DCM.a = [0,1,0;1,0,1;0,1,0]; % A-matrix (connectivity)
+
     DCM.b(:,:,1) = [0,1,0;1,0,1;0,1,0]; % B-matrix (modulation for stim)
     DCM.b(:,:,2) = [0,1,0;1,0,1;0,1,0]; % B-matrix (modulation for imag)
-   
+
     DCM.c = [1,1;0,0;0,0];  % C-matrix (input effects)
-   
+
     DCM.d = zeros(3,3,0); % D-matrix (non-linear effects)
 
     save(fullfile(DCM_folder_path,'DCM_m16_full.mat'),'DCM');

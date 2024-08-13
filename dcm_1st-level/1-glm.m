@@ -1,3 +1,9 @@
+%% GLM Specification, Estimation, Contrasts
+% --------------------------------------------------------------
+%This script specifies the design matrix of the fMRI dataset. It
+%concatenates onsets of conditions into Stimulation and Imagery regressors.
+% Angela Seo
+
 % initializing SPM
 spm_path = '/Users/angelaseo/Documents/spm-main'; % Enter the path of your SPM folder
 

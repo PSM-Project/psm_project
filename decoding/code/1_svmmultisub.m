@@ -6,17 +6,21 @@
 % It assumes that the data is already preprocessed (including smoothing and
 % normalizing) and that beta-images from a first level GLM have been computed.
 
-%% SET NECCESSARY MATLAB-PATHS
+% set neccessary matlab paths
+%-----------------------------------------------------------------------------------------
 
 % Add The Decoding Toolbox and SPM to your Matlab path 
 % TDT
-addpath('C:\Users\User\Documents\MATLAB\decoding_toolbox')
+tdt_path = 'C:\Users\User\Documents\MATLAB\decoding_toolbox'
+addpath(tdt_path)
 assert(~isempty(which('decoding_defaults.m', 'function')), 'TDT not found in path, please add')
 % SPM
-addpath('C:\Users\User\Documents\MATLAB\spm12')
+spm_path = 'C:\Users\User\Documents\MATLAB\spm12'
+addpath(spm_path)
 assert((~isempty(which('spm.m', 'function')) || ~isempty(which('BrikInfo.m', 'function'))) , 'Neither SPM nor AFNI found in path, please add (or remove this assert if you really dont need to read brain images)')
 
-%% SET THE CONFIGURATION STRUCTURE AND THE ANALYSIS TYPE
+% set the configuartion structure and the analysis type
+%-----------------------------------------------------------------------------------------
 
 % Set the configuration structure of The Decoding Toolbox to default values
 cfg = decoding_defaults;
@@ -29,19 +33,21 @@ cfg.analysis = 'searchlight';
 % set the searchlight radius to 3 voxels
 cfg.searchlight.radius = 3; 
 
-%% PREPARATION FOR THE LOOP OVER ALL SUBJECTS
+% prepare the loop over all subjects
+%-----------------------------------------------------------------------------------------
 
 % generate as many subject IDs as you have subjects to analyze
 subids = generate_subids(10); 
-% assign the folder which contains you data a variable for more compact
-% coding
+% assign the folder which contains your data
+
 base_dir = 'C:\data\Decoding';
 
 % create an empty variable to eventually create subject specific result
 % folders
 result_dirs = cell(1, length(subids));
 
-%% LOOP FOR A MULTISJUBJECT SEARCHLIGHT SVM STARTS
+%% loop over all subjects (svm searchlight)
+%-----------------------------------------------------------------------------------------
 
 % create the subject specific results folders for the decoding analysis
 % that will be performed

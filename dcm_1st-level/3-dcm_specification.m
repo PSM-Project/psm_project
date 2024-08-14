@@ -20,7 +20,7 @@ spm_jobman('initcfg')
 % specifying data, participant and run paths
 subject_folder = {'sub-001' 'sub-002' 'sub-003' 'sub-004' 'sub-005' 'sub-006' 'sub-007' 'sub-009' 'sub-010'};
 %% Specify DCM Models
-% Modified from the Attention batch script
+% Modified from the Attention DCM batch script from the SPM manual
 for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folder_sub
 
     clear DCM
@@ -73,7 +73,7 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
     DCM.U.dt = 0.1250;
 
     % Concatenate input names from all sessions
-    DCM.U.name = {'Stimulation' 'Imagery'}; % Ensure names are correctly concatenated
+    DCM.U.name = {'Stimulation' 'Imagery'};
 
     % Concatenate input values from all sessions, using the entire matrix
     DCM.U.u = [SPM.Sess(1).U(1).u ... % 1st column

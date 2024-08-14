@@ -1,7 +1,7 @@
 %% VOI (Time Series) Extraction
 %This script takes the estimated SPM.mat file from the GLM creation script
 %and outputs 3 time series data for our ROIs: S1, S2. S3. 
-% Received help from: SPM12 DCM manual attention dataset
+% Received help from: SPM12 DCM manual attention dataset and batch script
 % Angela Seo
 %----------------------------------------------------------------------------------------------------
 
@@ -24,7 +24,7 @@ subject_folder = {'sub-006' 'sub-007' 'sub-008' 'sub-009' 'sub-010'};
 %%
 for i = 1:numel(subject_folder) % for loop from 1 to number of elements in folder_sub
 
-    S = []; % init empty structure
+    S = []; % create empty structure to store data path and subject i
     S.data_folder_path = data_folder_path; % add data folder path
     S.subject_folder = subject_folder{i}; % add subject path
 
@@ -34,7 +34,7 @@ for i = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
     VOI_folder_path = fullfile(S.data_folder_path, S.subject_folder, 'VOI');     % defining VOI folder path
 
     if ~exist(VOI_folder_path, 'dir')     % Check if the 'DCM' folder does not exist
-        mkdir(VOI_folder_path);      % Create the 'DCM' folder
+        mkdir(VOI_folder_path);      % Create the 'DCM' folder in the subject folder
     else
         disp('VOI folder already exists.');
     end
@@ -121,9 +121,7 @@ for i = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
     if isempty(voi_nii_files)
         warning('No VOI .nii files found for subject %s', subject_folder{i});
     else
-        % Loop through each file path to move individually since 2 nii
-        % files are generated per sub
-        for j = 1:size(voi_nii_files, 1)
+       for j = 1:size(voi_nii_files, 1)     % Loop through each file path to move individually since 2 nii files are generated per sub
             current_nii_file = deblank(voi_nii_files(j, :));
 
             % Remove the volume specification ',1'

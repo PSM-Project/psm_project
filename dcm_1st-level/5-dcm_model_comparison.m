@@ -25,9 +25,9 @@ subject_folder = {'sub-001'};
 
 for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folder_sub
 
-    S = []; % init empty structure
-    S.data_folder_path = data_folder_path; % add data folder path
-    S.subject_folder = subject_folder{j}; % add subject path
+    S = [];
+    S.data_folder_path = data_folder_path; 
+    S.subject_folder = subject_folder{j}; 
 
     DCM_folder_path = fullfile(S.data_folder_path, S.subject_folder, 'DCM');
     addpath(DCM_folder_path)
@@ -63,8 +63,9 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
 
     spm_jobman('run', matlabbatch)
 
-    % Save the resulting figures in the centralized figures folder
+    % Save the resulting figures in the figures folder
     %--------------------------------------------------------------
+        % received help for this section from ChatGPT
     figHandles = findall(0, 'Type', 'figure'); % Find all figure handles
     figures_folder = fullfile(DCM_folder_path, 'ModelComparisonFigures');
     subject = subject_folder{j}; % Get the current subject ID
@@ -82,7 +83,6 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
 
     %% To save Free energy approximation to log model evidence outputs as txt
     %--------------------------------------------------------------
-    % received help for this section from ChatGPT
     model_names = {
         'm1_null', 'm2_stimBU', 'm3_stimTD', 'm4_stimBU_stimTD', ...
         'm5_imagBU', 'm6_stimBU_imagBU', 'm7_stimTD_imagBU', 'm8_stimBU_stimTD_imagBU', ...

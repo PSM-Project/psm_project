@@ -23,7 +23,7 @@ subject_folder = {'sub-007'};
 
 for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folder_sub
 
-    S = []; % init empty structure
+    S = []; % creating an empty structue to store data path and subject folder j
     S.data_folder_path = data_folder_path; % add data folder path
     S.subject_folder = subject_folder{j}; % add subject path
 
@@ -72,34 +72,34 @@ pp_endog_S2toIPL = pp_posterior_A(2,3);
 pp_endog_IPL_toS2 = pp_posterior_A(3,2);
 
 % Modulatory connection EP
-ep_StimBU_S1toS2 = ep_posterior_B(2,1,1);   % (y,x,z) --> (column, row, dimension)
+ep_StimBU_S1toS2 = ep_posterior_B(2,1,1);   % (y,x,z) --> (column, row of non-zero element, dimension: (1=stim,2=imag))
 ep_StimBU_S2toIPL = ep_posterior_B(3,2,1);
 ep_ImagTD_S2toS1 = ep_posterior_B(1,2,2);
 ep_ImagTD_IPLtoS2 = ep_posterior_B(2,3,2);
 
-ep_StimTD_S2toS1 = ep_posterior_B(1,2,1);   % (y,x,z) --> (column, row, dimension)
+ep_StimTD_S2toS1 = ep_posterior_B(1,2,1);   
 ep_StimTD_IPLtoS2 = ep_posterior_B(2,3,1);
 ep_ImagBU_S1toS2 = ep_posterior_B(2,1,2);
 ep_ImagBU_S2toIPL = ep_posterior_B(3,2,2);
 
 % Modulatory connection VP
-vp_StimBU_S1toS2 = vp_posterior_B(2,1,1);   % (y,x,z) --> (column, row, dimension)
+vp_StimBU_S1toS2 = vp_posterior_B(2,1,1);   
 vp_StimBU_S2toIPL = vp_posterior_B(3,2,1);
 vp_ImagTD_S2toS1 = vp_posterior_B(1,2,2);
 vp_ImagTD_IPLtoS2 = vp_posterior_B(2,3,2);
 
-vp_StimTD_S2toS1 = vp_posterior_B(1,2,1);   % (y,x,z) --> (column, row, dimension)
+vp_StimTD_S2toS1 = vp_posterior_B(1,2,1);   
 vp_StimTD_IPLtoS2 = vp_posterior_B(2,3,1);
 vp_ImagBU_S1toS2 = vp_posterior_B(2,1,2);
 vp_ImagBU_S2toIPL = vp_posterior_B(3,2,2);
 
 % Modulatory connection PP
-pp_StimBU_S1toS2 = pp_posterior_B(2,1,1);   % (y,x,z) --> (column, row, dimension)
+pp_StimBU_S1toS2 = pp_posterior_B(2,1,1);   
 pp_StimBU_S2toIPL = pp_posterior_B(3,2,1);
 pp_ImagTD_S2toS1 = pp_posterior_B(1,2,2);
 pp_ImagTD_IPLtoS2 = pp_posterior_B(2,3,2);
 
-pp_StimTD_S2toS1 = pp_posterior_B(1,2,1);   % (y,x,z) --> (column, row, dimension)
+pp_StimTD_S2toS1 = pp_posterior_B(1,2,1);   
 pp_StimTD_IPLtoS2 = pp_posterior_B(2,3,1);
 pp_ImagBU_S1toS2 = pp_posterior_B(2,1,2);
 epp_ImagBU_S2toIPL = pp_posterior_B(3,2,2);
@@ -121,7 +121,7 @@ pp_driving_input_Imagery_S1 =  pp_posterior_C(1,2);
 % Portions of this section was written with the help of ChatGPT
 %-----------------------------------------------------------------------------------------
 % Define the file path for saving
-    output_file_path = fullfile(DCM_folder_path, 'DCM_values_M4.txt');
+    output_file_path = fullfile(DCM_folder_path, 'DCM_values_M4.txt'); % change output file title according to model
 
     % Open the file for writing
     fid = fopen(output_file_path, 'w');
@@ -155,7 +155,7 @@ pp_driving_input_Imagery_S1 =  pp_posterior_C(1,2);
     fprintf(fid, '\nModulatory Connections (StimBU):\n');
     fprintf(fid, 'S1 to S2:\n');
     fprintf(fid, '  Ep: %.4f\n', ep_StimBU_S1toS2);
-    fprintf(fid, '  Vp: %.4f\n', vp_posterior_B(2, 1, 1)); % Assuming same indices for Vp and Pp
+    fprintf(fid, '  Vp: %.4f\n', vp_posterior_B(2, 1, 1)); 
     fprintf(fid, '  Pp: %.4f\n', pp_posterior_B(2, 1, 1));
     
     fprintf(fid, 'S2 to IPL:\n');
@@ -214,17 +214,17 @@ pp_driving_input_Imagery_S1 =  pp_posterior_C(1,2);
 
 % Plot Parameters into a Bar Plot
 %--------------------------------------------------------------
+% Portions of this section were created with the help of ChatGPT
 % Define the file path for saving the bar plot
 plot_file_path = fullfile(DCM_folder_path, 'ModelComparisonFigures', 'Model4_parameters_plot.png');
 
-% Data preparation
 % Define connections and corresponding values (excluding driving inputs)
 connections = {'Endogenous: S1 to S2', 'Endogenous: S2 to S1', ...
                 'Endogenous: S2 to IPL', 'Endogenous: IPL to S2', ...
                 'Stimulation modulating S1 to S2', 'Stimulation modulating S2 to IPL', ...
                 'Imagery modulating S2 to S1', 'Imagery modulating IPL to S2'};
 
-% Posterior estimates (Ep), variances (Vp), precisions (Pp) for endogenous and modulatory connections
+% Combine posterior estimates (Ep), variances (Vp), precisions (Pp) for endogenous and modulatory connections
 ep_values = [ep_endog_S1toS2, ep_endog_S2toS1, ep_endog_S2toIPL, ep_endog_IPL_toS2, ...
              ep_StimBU_S1toS2, ep_StimBU_S2toIPL, ...
              ep_ImagTD_S2toS1, ep_ImagTD_IPLtoS2];

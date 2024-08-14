@@ -23,7 +23,7 @@ subject_folder = {'sub-001' 'sub-002' 'sub-003' 'sub-004' 'sub-005' 'sub-006' 's
 %% DCM Estimation
 for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folder_sub
 
-    S = []; % init empty structure
+    S = []; % creating empty structure to store data path and subject j
     S.data_folder_path = data_folder_path; % add data folder path
     S.subject_folder = subject_folder{j}; % add subject path
 
@@ -32,8 +32,10 @@ for j = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
 
     VOI_folder_path = fullfile(S.data_folder_path, S.subject_folder, 'VOI');     % defining VOI folder path
 
-    DCM_folder_path = fullfile(S.data_folder_path, S.subject_folder, 'DCM');
+    DCM_folder_path = fullfile(S.data_folder_path, S.subject_folder, 'DCM');    %defining DCM folder path
 
+    % Loading in DCM files into matlabbatch
+    %-----------------------------------------------------
     matlabbatch = [];
     matlabbatch{1}.spm.dcm.fmri.estimate.dcmmat = {...
         fullfile(DCM_folder_path, 'DCM_m1_null.mat'); ...

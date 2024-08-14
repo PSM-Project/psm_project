@@ -19,13 +19,13 @@ spm_jobman('initcfg')
 
 % specifying data, participant and run paths
 subject_folder = {'sub-006' 'sub-007' 'sub-008' 'sub-009' 'sub-010'};
-run_folder = {'run-01'};
+run_folder = {'run-01'}; % only specify run 1 since later steps- contrasts and time-series extraction only takes run 1 into account
 
 
 %%
 for i = 1:numel(subject_folder) % for loop from 1 to number of elements in folder_sub
 
-    S = []; % init empty structure
+    S = []; % creating empty structure to store data folder and subject i
     S.data_folder_path = data_folder_path; % add data folder path
     S.subject_folder = subject_folder{i}; % add subject path
 
@@ -141,7 +141,7 @@ for i = 1:numel(subject_folder) % for loop from 1 to number of elements in folde
     %Contrasts
     glm_folder_path = fullfile(S.data_folder_path, S.subject_folder, 'GLM');     % defining GLM folder path
 
-    specified_glm = spm_select('FPList', glm_folder_path, '^SPM.mat$');
+    specified_glm = spm_select('FPList', glm_folder_path, '^SPM.mat$');     % selecting the previously created SPM.mat design matrix 
 
     matlabbatch = [];
     matlabbatch{1}.spm.stats.con.spmmat = {specified_glm};
